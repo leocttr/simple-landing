@@ -1,0 +1,121 @@
+.contactForm {
+  padding: 60px 20px;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+}
+
+.contactForm__container {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 32px 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.contactForm__title {
+  margin: 0 0 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+}
+
+.contactForm__subtitle {
+  margin: 0 0 24px;
+  font-size: 0.95rem;
+  color: #6b7280;
+  line-height: 1.5;
+}
+
+.contactForm__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.contactForm__field {
+  width: 100%;
+}
+
+.contactForm__input,
+.contactForm__textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-size: 1rem;
+  color: #111827;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.contactForm__input {
+  height: 48px;
+}
+
+.contactForm__textarea {
+  min-height: 140px;
+  resize: vertical;
+}
+
+.contactForm__input::placeholder,
+.contactForm__textarea::placeholder {
+  color: #9ca3af;
+}
+
+.contactForm__input:focus,
+.contactForm__textarea:focus {
+  border-color: #ff0004;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+  background: #ffffff;
+}
+
+.contactForm__captcha {
+  display: flex;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.contactForm__button {
+  margin-top: 4px;
+  width: 100%;
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  background: #ff0004;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.18);
+}
+
+.contactForm__button:hover {
+  background: #000000;
+  transform: translateY(-1px);
+}
+
+.contactForm__button:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 480px) {
+  .contactForm {
+    padding: 30px 14px;
+  }
+
+  .contactForm__container {
+    padding: 24px 18px;
+    border-radius: 14px;
+  }
+
+  .contactForm__title {
+    font-size: 1.6rem;
+  }
+}
