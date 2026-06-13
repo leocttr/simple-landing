@@ -1,5 +1,4 @@
-import { useEffect, useState, useRef } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useEffect, useState } from "react";
 import TestimonialCard from "../components/TestimonialCard";
 import Logo from "../assets/logo.svg";
 import Menu from "../assets/menu.svg";
@@ -21,67 +20,19 @@ import IconYT from "../assets/you.svg";
 import korn from "../assets/images/korn.png";
 import radiohead from "../assets/images/radiohead.png";
 import deftones from "../assets/images/deftones.png";
+import { ContactForm } from '../components/ContactForm';
+
 
 export default function Home() {
-    const [email, setEmail] = useState("");
-    function handleCompleteChallenge(token: string | null) {
-        if (!token) {
-            setChallengeCompleted(false);
-            return;
-        }
-        setChallengeCompleted(true);
-    }
-
-    function isValidForm() {
-        const isValidFields = email.trim() !== "" && message.trim() !== "";
-        return isValidFields && isChallengeCompleted;
-    }
-
-    async function handleSubmit(e: React.FormEvent) {
-        e.preventDefault();
-        if (!isValidForm()) {
-            alert("Por favor, preencha todos os campos e marque a caixa 'Eu não sou um robô'.");
-            return;
-        }
-
-        try {
-            await sendContactEmail();
-
-            alert("E-mail enviado com sucesso!");
-            setEmail("");
-            setMessage("");
-            setChallengeCompleted(false);
-            recaptchaRef.current?.reset();
-
-        } catch (erro: any) {
-            alert(erro.message || "Erro ao enviar E-mail.");
-        }
-    }
-    const [message, setMessage] = useState("");
-    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
-    async function sendContactEmail() {
-        const response = await fetch("/api/send-email", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                email,
-                message
-            }),
-        });
-
-        if (!response.ok) {
-            const body = await response.json().catch(() => ({}));
-            throw new Error(body.error ?? "Erro ao enviar E-mail.");
-        }
-    }
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+
     useEffect(() => {
         const html = document.querySelector("html");
         if (html) {
             html.style.overflow = showMobileMenu ? "hidden" : "auto";
         }
     }, [showMobileMenu]);
+    
     return (
         <>
             <header className="py-sm">
@@ -117,7 +68,7 @@ export default function Home() {
                                             <li> <a onClick={() => setShowMobileMenu(!showMobileMenu)} href="#solution">Diferenciais</a> </li>
                                             <li> <a onClick={() => setShowMobileMenu(!showMobileMenu)} href="#testimonials">Depoimentos</a> </li>
                                             <li> <a onClick={() => setShowMobileMenu(!showMobileMenu)} href="#pricing">Clube</a> </li>
-                                            <li> <a onClick={() => setShowMobileMenu(!showMobileMenu)} href="#contact">Contato</a> </li>
+                                            <li> <a onClick={() => setShowMobileMenu(!showMobileMenu)} href="#contato">Contato</a> </li>
                                             <li><a onClick={() => setShowMobileMenu(!showMobileMenu)} className="reverse-color" href="#">Login</a></li>
                                         </ul>
                                         <span onClick={() => setShowMobileMenu(!showMobileMenu)} className="btn-wrapper">
@@ -282,46 +233,9 @@ export default function Home() {
                     </div>
                 </section>
             </section>
-            <section id="contato" style={{ padding: "40px 20px", maxWidth: "400px", margin: "0 auto", textAlign: "center" }}>
-                <h2>Fale Conosco</h2>
-                <form onSubmit={handleSubmit}>
-                    <div style={{ marginBottom: "10px" }}>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Digite seu e-mail"
-                            style={{ width: "100%", padding: "10px" }}
-                            required
-                        />
-                    </div>
 
-                    <div style={{ marginBottom: "10px" }}>
-                        <textarea
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder="Digite sua mensagem ou dúvida"
-                            style={{ width: "100%", padding: "10px", height: "100px" }}
-                            required
-                        />
-                    </div>
+            <ContactForm />
 
-                    <div style={{ marginBottom: "15px", display: "flex", justifyContent: "center" }}>
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                            onChange={handleCompleteChallenge}
-                        />
-                    </div>
-
-                    <button
-                        type="submit"
-                        style={{ padding: "10px 20px", cursor: "pointer", width: "100%", backgroundColor: "var(--primary-color)", color: "#fff", border: "none", borderRadius: "4px", fontWeight: "bold" }}
-                    >
-                        Enviar Mensagem
-                    </button>
-                </form>
-            </section>
             <footer className="footer-container">
                 <div className="footer-grid">
 
