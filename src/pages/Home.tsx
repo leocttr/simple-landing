@@ -53,9 +53,7 @@ export default function Home() {
                         <div className="desktop-only">
                             <div className="flex items-center">
                                 <a className="reverse-color ml-lg" href="">Login</a>
-                                <button style={{ padding: '0.5rem 1rem', background: 'var(--primary-color)', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
-                                    Cadastre-se
-                                </button>
+                                <span><Button text="Cadastre-se" /></span>
                             </div>
                         </div>
 
